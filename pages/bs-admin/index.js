@@ -46,7 +46,7 @@ export default function LoginPage() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.card}>
-        <h1 className={styles.logo}>DVRX Admin</h1>
+        <h1 className={styles.logo}>FanStore Admin</h1>
         <p className={styles.subtitle}>Sign in to continue</p>
 
         {error && <div className={styles.error}>{error}</div>}
@@ -56,7 +56,7 @@ export default function LoginPage() {
             <label>Email</label>
             <input
               type="email"
-              placeholder="admin@example.com"
+              placeholder="admin@xxxx.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required

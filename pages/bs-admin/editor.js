@@ -155,7 +155,7 @@ export default function EditorPage() {
     <>
       <header className={styles.header}>
         <div className={styles.headerRight}>
-          <h2 className={styles.logo}>DVRX</h2>
+          <h2 className={styles.logo}>FanStore</h2>
           <button
             className={styles.pixelBtn}
             onClick={() => setShowPixel(true)}
