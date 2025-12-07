@@ -23,11 +23,14 @@ export default function AdminSubmissionsPage() {
   async function load() {
     const token = localStorage.getItem("auth_token");
 
-    const res = await fetch("http://localhost:5000/api/submissions", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const res = await fetch(
+      "https://joshspot-landing-backend-production.up.railway.app/api/submissions",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
     const data = await res.json();
     console.log("📥 RAW SUBMISSIONS:", data);

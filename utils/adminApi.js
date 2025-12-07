@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:5000"; // Express backend
+const BASE_URL = "https://joshspot-landing-backend-production.up.railway.app"; // Express backend
 
 // Utility to get token
 function getAuthHeaders(extra = {}) {

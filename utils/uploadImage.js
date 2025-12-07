@@ -7,10 +7,13 @@ export async function uploadToServer(file) {
   const form = new FormData();
   form.append("image", file);
 
-  const res = await fetch("http://localhost:5000/api/upload", {
-    method: "POST",
-    body: form,
-  });
+  const res = await fetch(
+    "https://joshspot-landing-backend-production.up.railway.app/api/upload",
+    {
+      method: "POST",
+      body: form,
+    }
+  );
 
   const data = await res.json();
   return data.url;

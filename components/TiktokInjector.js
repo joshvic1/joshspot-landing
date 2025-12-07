@@ -7,7 +7,8 @@ export default function TikTokInjector() {
     async function setup() {
       try {
         const API_URL =
-          process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+          process.env.NEXT_PUBLIC_API_URL ||
+          "https://joshspot-landing-backend-production.up.railway.app";
 
         const res = await fetch(`${API_URL}/api/page`);
 
