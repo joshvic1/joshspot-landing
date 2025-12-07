@@ -46,12 +46,15 @@ export default function AdminSubmissionsPage() {
   async function deleteItem(id) {
     if (!confirm("Delete this submission?")) return;
 
-    await fetch(`http://localhost:5000/api/submissions/${id}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
-      },
-    });
+    await fetch(
+      `https://joshspot-landing-backend-production.up.railway.app/api/submissions/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
+        },
+      }
+    );
 
     load();
   }
