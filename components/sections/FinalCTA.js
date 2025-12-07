@@ -72,17 +72,20 @@ export default function FinalCTA({ section }) {
         window.ttq.track("CompleteRegistration");
       }
 
-      const res = await fetch("http://localhost:5000/api/submissions", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          sectionId: section.id,
-          sectionTitle: section.title,
-          name: form.name.trim(),
-          phone: cleanedPhone,
-          meta: { createdAt: Date.now() },
-        }),
-      });
+      const res = await fetch(
+        "https://joshspot-landing-backend-production.up.railway.app/api/submissions",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            sectionId: section.id,
+            sectionTitle: section.title,
+            name: form.name.trim(),
+            phone: cleanedPhone,
+            meta: { createdAt: Date.now() },
+          }),
+        }
+      );
 
       const data = await res.json();
 
