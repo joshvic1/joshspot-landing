@@ -82,7 +82,7 @@ export default function AdminSubmissionsPage() {
     <>
       <header className={s.header}>
         <div className={s.headerRight}>
-          <h2 className={s.logo}>DVRX</h2>
+          <h2 className={s.logo}>FanStore</h2>
           <button className={s.pixelBtn} onClick={() => setShowPixel(true)}>
             Set Pixel
           </button>
