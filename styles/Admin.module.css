@@ -1,0 +1,284 @@
+/* styles/Admin.module.css
+   Clean & Minimal Admin UI (Webflow/Framer style)
+*/
+
+/* Page */
+.adminPage {
+  background: #f6f7fb;
+  min-height: 100vh;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial;
+  color: #111827;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 26px 34px;
+  background: linear-gradient(90deg, #5b4de0 0%, #6a5dfc 100%);
+  color: #fff;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  box-shadow: 0 6px 24px rgba(91, 77, 224, 0.18);
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.logo {
+  font-weight: 800;
+  font-size: 22px;
+  letter-spacing: -0.2px;
+  margin: 0;
+}
+
+.headerRight {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+/* Publish Button */
+.publishBtn {
+  background: #00c16e;
+  color: white;
+  padding: 12px 22px;
+  border-radius: 10px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(0, 193, 110, 0.18);
+}
+.publishBtn:active {
+  transform: translateY(1px);
+}
+
+/* Main content area */
+.mainGrid {
+  max-width: 1150px;
+  margin: 28px auto;
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 26px;
+  padding: 0 18px;
+}
+
+/* Left control card */
+.controlsCard {
+  background: white;
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 8px 30px rgba(20, 20, 50, 0.04);
+  position: sticky;
+  top: 28px;
+  min-height: 200px;
+}
+
+.controlsCard h4 {
+  margin: 6px 0 12px;
+  font-size: 14px;
+  color: #374151;
+  font-weight: 700;
+}
+
+.controlsCard p {
+  margin: 0 0 12px;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+/* Inputs */
+.controlsCard textarea,
+.controlsCard input[type="text"],
+.controlsCard input[type="color"] {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #e6e9f0;
+  font-size: 14px;
+  resize: vertical;
+  margin-bottom: 12px;
+  background: #fcfcff;
+}
+
+/* Add button (top of editor column) */
+.addSectionBtn {
+  background: #6a5dfc;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  box-shadow: 0 8px 20px rgba(91, 77, 224, 0.12);
+  margin-bottom: 18px;
+}
+
+/* Editor column */
+.editorColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Editor container (list of section cards) */
+.editorContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Section card (preview) */
+.sectionWrapper {
+  background: white;
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 6px 18px rgba(18, 23, 50, 0.04);
+  position: relative;
+  overflow: visible;
+}
+
+/* Icons group */
+.iconGroup {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: flex;
+  gap: 10px;
+}
+
+/* Icon style */
+.iconBtn {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #eef2ff;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(20, 20, 50, 0.04);
+}
+
+.iconBtn:hover {
+  transform: translateY(-3px);
+}
+
+/* Preview area */
+.previewBox {
+  padding: 8px 6px 6px;
+  text-align: center;
+}
+
+.previewBox h1 {
+  font-size: 22px;
+  margin: 8px 0;
+  color: #111827;
+}
+
+.previewBox p {
+  color: #6b7280;
+  margin: 6px 0 14px;
+  font-size: 15px;
+}
+
+/* preview image */
+.previewImg {
+  width: 100%;
+  max-width: 420px;
+  border-radius: 10px;
+  margin: 12px auto;
+  display: block;
+}
+
+/* small preview button */
+.previewButton {
+  background: #6a5dfc;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+/* Editor panel (expanded) */
+.editorPanel {
+  margin-top: 16px;
+  padding: 14px;
+  background: #fbfbff;
+  border-radius: 10px;
+  border: 1px solid #eef2ff;
+}
+
+/* Editor fields inside panel */
+.editorPanel h4 {
+  margin: 8px 0;
+  font-size: 13px;
+  color: #374151;
+}
+.editorPanel input[type="text"],
+.editorPanel input[type="datetime-local"],
+.editorPanel select,
+.editorPanel input[type="color"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #e6e9f0;
+  margin-bottom: 10px;
+  background: white;
+}
+
+/* editor buttons */
+.editorPanel .smallBtn {
+  background: #6a5dfc;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+/* Add-section modal (centered overlay) */
+.addSectionModal {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 18%;
+  margin: 0 auto;
+  width: 92%;
+  max-width: 420px;
+  background: white;
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 14px 40px rgba(20, 20, 50, 0.12);
+  z-index: 9999;
+}
+
+/* small choices in modal */
+.sectionChoice {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #eef2ff;
+  margin-bottom: 10px;
+  cursor: pointer;
+  background: #fcfcff;
+}
+
+/* responsive */
+@media (max-width: 880px) {
+  .mainGrid {
+    grid-template-columns: 1fr;
+    padding: 0 14px;
+  }
+  .controlsCard {
+    position: relative;
+    top: 0;
+  }
+}

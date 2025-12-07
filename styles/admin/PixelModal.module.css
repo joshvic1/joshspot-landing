@@ -1,0 +1,132 @@
+/* =========================================================
+   BACKDROP
+========================================================= */
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Background dim */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(1px);
+}
+
+/* =========================================================
+   MODAL CARD
+========================================================= */
+
+.modal {
+  position: relative;
+  width: min(420px, 92%);
+  background: #ffffff;
+  padding: 24px 20px;
+  z-index: 5001;
+  border-radius: 14px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+  animation: fadeIn 0.25s ease;
+}
+
+/* =========================================================
+   TEXT CONTENT
+========================================================= */
+
+.title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  margin-bottom: 6px;
+  color: #111;
+}
+
+.desc {
+  font-size: 0.95rem;
+  color: #4b5563;
+  margin-bottom: 18px;
+  line-height: 1.45;
+}
+
+.input {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 0.95rem;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  margin-bottom: 18px;
+  outline: none;
+  transition: 0.2s;
+}
+
+.input:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.cancelBtn {
+  background: #f3f4f6;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #374151;
+  transition: 0.2s ease;
+}
+
+.cancelBtn:hover {
+  background: #e5e7eb;
+}
+
+.saveBtn {
+  background: linear-gradient(90deg, #4f46e5, #9333ea);
+  color: white;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 700;
+  transition: 0.2s ease;
+}
+
+.saveBtn:hover {
+  opacity: 0.9;
+}
+
+/* Disabled state */
+.saveBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

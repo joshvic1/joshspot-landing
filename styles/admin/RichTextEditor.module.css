@@ -1,0 +1,135 @@
+/* ============================= */
+/* EDITOR WRAPPER */
+/* ============================= */
+.editorBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+/* ============================= */
+/* TOOLBAR */
+/* ============================= */
+.toolbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  padding: 10px 12px;
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* Toolbar button + heading dropdown */
+.toolbar button,
+.headingSelect {
+  min-width: 36px;
+  height: 36px;
+  padding: 0 10px;
+
+  border-radius: 8px;
+  border: 1px solid #d0d0d0;
+  background: white;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 15px;
+  color: #000;
+  transition: 0.15s ease-in-out;
+}
+
+.toolbar button:hover,
+.headingSelect:hover {
+  background: #f2f2f2;
+}
+
+/* Dropdown */
+.headingSelect {
+  font-size: 14px;
+  color: #222;
+}
+
+/* ACTIVE BUTTON STATE */
+.activeBtn {
+  background: #111 !important;
+  color: #fff !important; /* white icons so they show */
+  border-color: #111 !important;
+  box-shadow: 0 0 0 2px #00000020;
+}
+
+/* COLOR PICKER */
+.colorBtn input {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* ============================= */
+/* EDITABLE AREA */
+/* ============================= */
+.customEditor {
+  min-height: 160px;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  background: white;
+
+  color: #000;
+  font-size: 0.96rem;
+  line-height: 1.55;
+
+  outline: none;
+  overflow: visible;
+
+  /* allow alignment formatting */
+  direction: ltr !important;
+}
+
+/* Remove forced text-align override */
+.customEditor *,
+.customEditor p,
+.customEditor span {
+  direction: ltr !important;
+}
+
+/* Placeholder */
+.customEditor:empty::before {
+  content: attr(data-placeholder);
+  color: #bbb;
+  pointer-events: none;
+}
+
+/* ============================= */
+/* HEADINGS (live preview) */
+/* ============================= */
+.customEditor h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 16px 0 10px;
+}
+
+.customEditor h2 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin: 14px 0 8px;
+}
+
+.customEditor h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 12px 0 6px;
+}

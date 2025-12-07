@@ -1,0 +1,467 @@
+/* =========================================================
+   🌈 GLOBAL THEME (COMPACT VERSION)
+========================================================= */
+
+:root {
+  --primary: #4f46e5;
+  --primary-dark: #3730a3;
+  --accent: #9333ea;
+
+  --text-dark: #0f0f0f;
+  --text-light: #ffffff;
+
+  --bg: #ffffff;
+
+  --radius: 14px;
+  --shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+
+  --gradient: linear-gradient(90deg, #4f46e5, #9333ea);
+}
+
+/* =========================================================
+   BASE LAYOUT (Tight & Clean)
+========================================================= */
+
+.section {
+  padding: 55px 18px; /* Reduced from 100px → 55px */
+}
+
+.container {
+  width: min(1150px, 94%);
+  margin: 0 auto;
+}
+
+/* =========================================================
+   TYPOGRAPHY (Modern + Compact)
+========================================================= */
+
+.sectionTitle {
+  font-size: 1.9rem; /* Reduced for compactness */
+  font-weight: 800;
+  background: #000;
+  -webkit-background-clip: text;
+  color: transparent;
+  margin-bottom: 18px;
+  text-align: center;
+}
+
+.sectionSubtitle {
+  font-size: 1.45rem;
+  font-weight: 700;
+  margin-bottom: 14px;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.sectionParagraph {
+  font-size: 1rem;
+  line-height: 1.55;
+  opacity: 0.9;
+  margin-bottom: 16px;
+}
+
+/* Use a clean modern font */
+body,
+.section,
+.container {
+  font-family: "Inter", "DM Sans", "Poppins", sans-serif;
+}
+
+/* =========================================================
+   BUTTONS (Tighter & Cleaner)
+========================================================= */
+
+.ctaPrimary {
+  background: var(--gradient);
+  color: var(--text-light);
+  padding: 12px 22px; /* More compact */
+  border-radius: var(--radius);
+  border: none;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(79, 70, 229, 0.25);
+  transition: 0.25s ease;
+}
+
+.ctaPrimary:hover {
+  transform: translateY(-2px);
+  opacity: 0.92;
+}
+
+.ctaUrgent {
+  background: linear-gradient(90deg, #ef4444, #f97316);
+  color: white;
+  padding: 12px 22px;
+  border-radius: var(--radius);
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(239, 68, 68, 0.3);
+  transition: 0.25s ease;
+}
+
+.ctaBig {
+  padding: 16px 28px;
+  font-size: 1.1rem;
+  font-weight: 800;
+  border-radius: var(--radius);
+  border: none;
+  background: var(--gradient);
+  color: var(--text-light);
+  box-shadow: 0 10px 22px rgba(79, 70, 229, 0.3);
+}
+
+/* =========================================================
+   BENEFIT GRID (Compact)
+========================================================= */
+
+.benefitGrid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  margin-top: 25px;
+}
+
+.benefitCard {
+  background: white;
+  padding: 18px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  text-align: center;
+  transition: 0.3s ease;
+}
+
+.benefitIcon {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.benefitTitle {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.benefitText {
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
+
+/* =========================================================
+   GALLERY (Better mobile: always 2 columns)
+========================================================= */
+
+.galleryGrid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(2, 1fr); /* Mobile = two columns */
+  margin-top: 10px;
+}
+
+.galleryImg {
+  width: 100%;
+  height: 180px;
+  border-radius: var(--radius);
+  object-fit: cover;
+  box-shadow: var(--shadow);
+  transition: 0.3s ease;
+}
+
+.galleryImg:hover {
+  transform: scale(1.04);
+}
+
+/* Expand only when width > 600px */
+@media (min-width: 600px) {
+  .galleryGrid {
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  }
+}
+
+/* =========================================================
+   IMAGE + TEXT
+========================================================= */
+
+.imageText {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 22px;
+  margin-top: 20px;
+}
+
+@media (min-width: 700px) {
+  .imageText {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.imageTextImg {
+  width: 100%;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  height: 240px;
+  object-fit: cover;
+}
+
+.imageTextContent {
+  font-size: 1rem;
+  line-height: 1.55;
+  opacity: 0.9;
+}
+
+/* =========================================================
+   PRODUCT PITCH
+========================================================= */
+
+.pitchList {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pitchItem {
+  font-size: 1rem;
+  font-weight: 600;
+  padding-left: 22px;
+  position: relative;
+}
+
+.pitchItem::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  top: 2px;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* =========================================================
+   PRODUCT SHOWCASE (2 columns ALWAYS on mobile)
+========================================================= */
+.section :has(.productGrid) {
+  /* margin: 1px; */
+  padding: 0;
+}
+.section :has(.galleryGrid) {
+  /* margin: 1px; */
+  padding: 0;
+}
+.productGrid {
+  display: grid;
+  gap: 22px;
+  grid-template-columns: repeat(2, 1fr); /* Mobile = 2 columns */
+  margin-top: 15px;
+}
+
+@media (min-width: 600px) {
+  .productGrid {
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  }
+}
+
+.productCard {
+  background: #ffffff;
+  border-radius: var(--radius);
+  padding: 10px;
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.productImg {
+  width: 100%;
+  height: 180px;
+  border-radius: 12px;
+  object-fit: cover;
+  margin-bottom: 12px;
+}
+
+.productName {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.productDesc {
+  font-size: 0.92rem;
+  opacity: 0.85;
+  margin-bottom: 8px;
+}
+
+.productPrice {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--primary-dark);
+  margin-bottom: 12px;
+}
+
+/* =========================================================
+   TESTIMONIALS
+========================================================= */
+
+.testimonialGrid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  margin-top: 20px;
+}
+
+.testimonialBox {
+  background: white;
+  padding: 18px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.testimonialStars {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+  color: #facc15;
+}
+
+.testimonialQuote {
+  font-size: 0.95rem;
+  opacity: 0.9;
+  margin-bottom: 8px;
+}
+
+.testimonialName {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* =========================================================
+   FAQ
+========================================================= */
+.section :has(.faqList) {
+  /* margin: 1px; */
+  padding: 0;
+}
+.faqList {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.faqItem {
+  background: white;
+  padding: 18px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.faqQuestion {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.faqAnswer {
+  font-size: 0.95rem;
+  opacity: 0.85;
+  line-height: 1.55;
+}
+
+/* =========================================================
+   COUNTDOWN
+========================================================= */
+
+.countdownTimer {
+  background: var(--gradient);
+  color: white;
+  padding: 18px;
+  border-radius: var(--radius);
+  font-size: 1.8rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 20px;
+}
+/* CTA FORM */
+.ctaForm {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.ctaLabel {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.ctaInput {
+  padding: 14px;
+  border-radius: 10px;
+  border: 2px solid #ddd;
+  font-size: 1rem;
+  width: 100%;
+  outline: none;
+}
+
+.ctaInput:focus {
+  border-color: #555;
+}
+/* FORM WRAPPER */
+.ctaForm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ctaLabel {
+  font-size: 0.95rem;
+  font-weight: 600;
+  opacity: 0.9;
+}
+
+.ctaInput {
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  outline: none;
+  transition: 0.25s ease;
+  background: #ffffff;
+}
+
+.ctaInput:focus {
+  border-color: #000000;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+}
+.finalForm {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.finalForm input {
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 1.1rem;
+}
+
+.finalForm button {
+  margin-top: 10px;
+}
+
+.successMessage {
+  margin-top: 20px;
+  padding: 14px;
+  background: #e7ffe7;
+  color: #0a8a0a;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 600;
+}

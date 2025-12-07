@@ -1,0 +1,82 @@
+/* EDITOR SECTION WRAPPER */
+.editorSection {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  margin-top: 10px;
+}
+
+/* FIELD GROUP */
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* LABEL */
+.label {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #333;
+}
+
+/* GENERIC INPUT */
+.input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.92rem;
+  background: #fff;
+  transition: 0.2s ease;
+}
+
+.input:focus {
+  border-color: #111;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.08);
+  outline: none;
+}
+
+/* SPLIT ROW */
+.splitRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* QUILL EDITOR WRAPPER */
+.quillEditor {
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  overflow: hidden;
+}
+
+/* QUILL TOOLBAR */
+.quillEditor .ql-toolbar {
+  background: #f8f9fb;
+  border: none;
+  border-bottom: 1px solid #eee;
+  padding: 8px;
+}
+
+/* QUILL CONTENT AREA */
+.quillEditor .ql-container {
+  border: none !important;
+  min-height: 90px;
+  font-size: 0.95rem;
+}
+
+/* FIX SCROLLBAR INSIDE QUILL */
+.quillEditor .ql-editor::-webkit-scrollbar {
+  width: 6px;
+}
+
+.quillEditor .ql-editor::-webkit-scrollbar-thumb {
+  background: #cfcfcf;
+  border-radius: 10px;
+}
+
+.quillEditor .ql-editor::-webkit-scrollbar-track {
+  background: transparent;
+}

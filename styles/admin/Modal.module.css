@@ -1,0 +1,597 @@
+/* ============================= */
+/* OVERLAY */
+/* ============================= */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(8px);
+  animation: fadeIn 0.25s ease-out forwards;
+  z-index: 1000;
+}
+
+/* ============================= */
+/* MODAL CONTAINER */
+/* ============================= */
+.content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.94);
+
+  width: 92%;
+  max-width: 720px;
+  max-height: 90vh;
+  overflow-y: auto;
+
+  background: #fafafa;
+  border-radius: 20px;
+  padding: 34px 32px;
+  box-shadow: 0 24px 55px rgba(0, 0, 0, 0.25);
+
+  animation: zoomIn 0.25s ease-out forwards;
+  font-family: Inter, sans-serif;
+  z-index: 1001;
+
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* ============================= */
+/* TITLE */
+/* ============================= */
+.title {
+  font-size: 1.55rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 28px;
+  color: #1a1a1a;
+}
+
+/* ============================= */
+/* CLOSE BUTTON */
+/* ============================= */
+.closeBtn {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  width: 38px;
+  height: 38px;
+
+  border: none;
+  border-radius: 50%;
+  background: #e9e6e6;
+  cursor: pointer;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: 0.22s ease;
+  font-size: 1.2rem;
+}
+
+.closeBtn:hover {
+  background: #e2e2e2;
+  transform: scale(1.07);
+}
+
+/* ============================= */
+/* FORM ROW */
+/* ============================= */
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.row label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #2c2c2c;
+}
+
+/* ============================= */
+/* INPUT */
+/* ============================= */
+.input {
+  width: 100%;
+  padding: 13px 14px;
+  border-radius: 10px;
+  border: 1px solid #cccccc;
+  background: #ffffff;
+  color: black;
+  font-size: 0.95rem;
+  transition: 0.22s ease;
+}
+
+.input:focus {
+  border-color: #000;
+  outline: none;
+}
+
+/* ============================= */
+/* INLINE COLOR PICKERS */
+/* ============================= */
+.inlineColor {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 14px;
+  align-items: center;
+}
+
+.inlineColor input[type="color"] {
+  width: 52px;
+  height: 46px;
+  border-radius: 10px;
+  border: 1px solid #bcbcbc;
+  background: #fff;
+  cursor: pointer;
+}
+
+/* ============================= */
+/* INPUT WITH COLOR BOX */
+/* ============================= */
+.inputWithColor {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 14px;
+  align-items: center;
+}
+
+.colorBoxMini {
+  width: 52px;
+  height: 46px;
+  border-radius: 10px;
+  border: 1px solid #bcbcbc;
+  cursor: pointer;
+}
+
+/* ============================= */
+/* EDITOR WRAPPER */
+/* ============================= */
+.editorWrapper {
+  margin-top: 26px;
+  padding: 20px;
+  border-radius: 16px;
+
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+
+  max-height: 48vh;
+  overflow-y: auto;
+}
+
+/* ============================= */
+/* SAVE BUTTON */
+/* ============================= */
+.saveBtn {
+  margin-top: 28px;
+  width: 100%;
+  padding: 16px;
+  border-radius: 12px;
+
+  font-size: 1.05rem;
+  font-weight: 600;
+  background: #000;
+  color: white;
+  border: none;
+
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.saveBtn:hover {
+  background: #1a1a1a;
+  transform: translateY(-2px);
+}
+
+/* ============================= */
+/* ANIMATIONS */
+/* ============================= */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    transform: translate(-50%, -50%) scale(0.92);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+/* ============================= */
+/* SCROLLBAR */
+/* ============================= */
+.content::-webkit-scrollbar,
+.editorWrapper::-webkit-scrollbar {
+  width: 7px;
+}
+
+.content::-webkit-scrollbar-thumb,
+.editorWrapper::-webkit-scrollbar-thumb {
+  background: #c5c5c5;
+  border-radius: 10px;
+}
+
+.content::-webkit-scrollbar-track,
+.editorWrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+/* REMOVE EDITOR AND INNER SCROLL */
+.editorWrapper {
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+.customEditor {
+  overflow: visible !important;
+}
+
+/* KEEP SINGLE SCROLL ONLY ON MODAL */
+.content {
+  overflow-y: auto;
+}
+/* Hide scrollbar but keep scrolling */
+.content::-webkit-scrollbar,
+.editorWrapper::-webkit-scrollbar,
+.customEditor::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.content {
+  scrollbar-width: none !important; /* Firefox */
+}
+
+.editorWrapper {
+  scrollbar-width: none !important;
+}
+
+.customEditor {
+  scrollbar-width: none !important;
+}
+/* Subtitle */
+.subTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #222;
+}
+
+/* Gallery grid */
+.galleryList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 16px;
+  /* margin-bottom: 20px; */
+}
+
+/* Each gallery item wrapper */
+.galleryItem {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #f3f3f3;
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: 0.15s ease;
+}
+
+.galleryItem:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+}
+
+/* Image */
+.galleryThumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Remove button */
+.removeBtn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+
+  background: rgba(0, 0, 0, 0.65);
+  color: white;
+  border: none;
+
+  width: 26px;
+  height: 26px;
+  font-size: 0.9rem;
+  border-radius: 50%;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: 0.15s ease;
+}
+
+.removeBtn:hover {
+  background: rgba(0, 0, 0, 0.85);
+}
+
+/* Upload Button */
+.uploadBtn {
+  display: inline-block;
+  padding: 10px 16px;
+  background: #000;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+.uploadBtn:hover {
+  background: #1a1a1a;
+  transform: translateY(-1px);
+}
+/* Product Card Container */
+.productCard {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 18px;
+
+  display: flex;
+  gap: 16px;
+
+  position: relative;
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Product Form Fields */
+.productFields {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Image Section */
+.imageSection {
+  width: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Image Preview */
+.productThumb {
+  width: 100%;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  background: #f5f5f5;
+}
+
+.placeholderThumb {
+  width: 100%;
+  height: 110px;
+  border-radius: 10px;
+  background: #f1f1f1;
+  color: #666;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed #ccc;
+}
+
+/* Upload Button */
+.uploadBtn {
+  background: #000;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+  text-align: center;
+}
+
+.uploadBtn:hover {
+  background: #1a1a1a;
+}
+
+/* Remove product */
+.removeBtn {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+
+  background: rgba(255, 0, 0, 0.85);
+  color: white;
+  border: none;
+  border-radius: 50%;
+
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+  font-size: 13px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: 0.15s ease;
+}
+
+.removeBtn:hover {
+  background: red;
+}
+/* title color and alignment fields */
+.colorInput {
+  width: 50px;
+  height: 32px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.field label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.limitWarning {
+  font-size: 14px;
+  color: #ff3b3b;
+  margin: 10px 0;
+  font-weight: 600;
+}
+
+/* Product cards */
+.productCard {
+  position: relative;
+  background: #f7f7f7;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  display: flex;
+  gap: 15px;
+}
+
+.productFields {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.imageSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.productThumb {
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.placeholderThumb {
+  width: 100px;
+  height: 100px;
+  background: #e5e5e5;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: #777;
+}
+
+.uploadBtn {
+  background: black;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.removeBtn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #ff4747;
+  color: white;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.addMiniBtn {
+  margin-top: 10px;
+  background: #111;
+  color: #fff;
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+}
+.galleryList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.galleryItem {
+  position: relative;
+}
+
+.galleryThumb {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.removeBtn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: #ff4444;
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  font-size: 14px;
+  color: white;
+  cursor: pointer;
+  border: none;
+}
+
+.uploadBtn {
+  margin-top: 12px;
+  background: black;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 8px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+/* 2 columns specifically on small screens */
+@media (max-width: 600px) {
+  .galleryList {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 400px) {
+  .galleryList {
+    grid-template-columns: repeat(4, 2fr);
+  }
+}

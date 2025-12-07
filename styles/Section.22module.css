@@ -1,0 +1,388 @@
+/* =========================================
+   🌈 PREMIUM GLOBAL THEME (INDIGO → PURPLE)
+========================================= */
+/* =========================================
+   PREMIUM AUTO-GLOW ENGINE (GLOBAL)
+========================================= */
+
+.glow-hover {
+  transition: box-shadow 0.35s ease, transform 0.25s ease;
+}
+
+.glow-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 12px rgba(var(--glow-color), 0.25),
+    0 0 28px rgba(var(--glow-color), 0.18);
+}
+
+/* Extract glow color from section background */
+.section {
+  --glow-color: 0, 0, 0;
+}
+
+.section[data-bg] {
+  /* Convert hex → RGB inside JS and set here */
+}
+
+:root {
+  --primary: #4f46e5;
+  --primary-dark: #3730a3;
+  --accent: #9333ea;
+  --text-dark: #0f0f0f;
+  --text-light: #ffffff;
+  --bg: #ffffff;
+  --radius: 18px;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  --gradient: linear-gradient(90deg, #4f46e5, #9333ea);
+}
+
+/* =========================================
+   PAGE WRAPPER
+========================================= */
+.page {
+  font-family: "Inter", sans-serif;
+  background: var(--bg);
+  color: var(--text-dark);
+  line-height: 1.7;
+}
+
+/* =========================================
+   SECTIONS
+========================================= */
+.section {
+  padding: 90px 20px;
+}
+
+.container {
+  width: min(1200px, 92%);
+  margin: 0 auto;
+}
+
+/* =========================================
+   TITLES
+========================================= */
+.section h3 {
+  font-size: 2.4rem;
+  font-weight: 800;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  color: transparent;
+  margin-bottom: 28px;
+}
+
+/* =========================================
+   PARAGRAPHS
+========================================= */
+.section p {
+  font-size: 1.12rem;
+  color: rgba(0, 0, 0, 0.85);
+  margin-bottom: 12px;
+}
+
+/* =========================================
+   BUTTONS
+========================================= */
+.ctaPrimary {
+  background: var(--gradient);
+  color: var(--text-light);
+  padding: 16px 28px;
+  border-radius: var(--radius);
+  border: none;
+  font-size: 1.15rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 10px 28px rgba(79, 70, 229, 0.35);
+  transition: 0.25s ease;
+}
+
+.ctaPrimary:hover {
+  transform: translateY(-3px);
+  opacity: 0.92;
+}
+
+.ctaUrgent {
+  background: linear-gradient(90deg, #ef4444, #f97316);
+  color: white;
+  padding: 16px 28px;
+  border-radius: var(--radius);
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 10px 28px rgba(239, 68, 68, 0.35);
+}
+
+/* =========================================
+   PRODUCT GRID
+========================================= */
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 32px;
+  margin-top: 40px;
+}
+
+.productCard {
+  background: white;
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
+  text-align: center;
+  transition: 0.3s ease;
+}
+
+.productCard:hover {
+  transform: translateY(-6px);
+}
+
+.productCard img {
+  width: 100%;
+  height: 240px;
+  border-radius: 14px;
+  object-fit: cover;
+  margin-bottom: 16px;
+}
+
+.productPrice {
+  font-size: 1.6rem !important;
+  font-weight: 800;
+  color: var(--primary-dark);
+}
+
+/* =========================================
+   GALLERY
+========================================= */
+.galleryGrid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.galleryGrid img {
+  width: 100%;
+  height: 220px;
+  border-radius: var(--radius);
+  object-fit: cover;
+  box-shadow: var(--shadow);
+  transition: 0.3s ease;
+}
+
+.galleryGrid img:hover {
+  transform: scale(1.06);
+}
+
+/* =========================================
+   COUNTDOWN
+========================================= */
+.countdownTimer {
+  background: var(--gradient);
+  color: white;
+  padding: 26px;
+  border-radius: var(--radius);
+  font-size: 2.6rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+/* =========================================
+   FAQ
+========================================= */
+.faqItem {
+  background: white;
+  border-radius: var(--radius);
+  padding: 26px;
+  box-shadow: var(--shadow);
+}
+
+/* =========================================
+   TESTIMONIALS
+========================================= */
+.testimonialBox {
+  background: white;
+  border-radius: var(--radius);
+  padding: 26px;
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+/* =========================================
+   🌈 PREMIUM GLOBAL THEME (INDIGO → PURPLE)
+========================================= */
+
+:root {
+  --primary: #4f46e5;
+  --primary-dark: #3730a3;
+  --accent: #9333ea;
+  --text-dark: #0f0f0f;
+  --text-light: #ffffff;
+  --bg: #ffffff;
+  --radius: 18px;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  --gradient: linear-gradient(90deg, #4f46e5, #9333ea);
+}
+
+/* =========================================
+   PAGE WRAPPER
+========================================= */
+.page {
+  font-family: "Inter", sans-serif;
+  background: var(--bg);
+  color: var(--text-dark);
+  line-height: 1.7;
+}
+
+/* =========================================
+   SECTIONS
+========================================= */
+.section {
+  padding: 90px 20px;
+}
+
+.container {
+  width: min(1200px, 92%);
+  margin: 0 auto;
+}
+
+/* =========================================
+   TITLES
+========================================= */
+.section h3 {
+  font-size: 2.4rem;
+  font-weight: 800;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  color: transparent;
+  margin-bottom: 28px;
+}
+
+/* =========================================
+   PARAGRAPHS
+========================================= */
+.section p {
+  font-size: 1.12rem;
+  color: rgba(0, 0, 0, 0.85);
+  margin-bottom: 12px;
+}
+
+/* =========================================
+   BUTTONS
+========================================= */
+.ctaPrimary {
+  background: var(--gradient);
+  color: var(--text-light);
+  padding: 16px 28px;
+  border-radius: var(--radius);
+  border: none;
+  font-size: 1.15rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 10px 28px rgba(79, 70, 229, 0.35);
+  transition: 0.25s ease;
+}
+
+.ctaPrimary:hover {
+  transform: translateY(-3px);
+  opacity: 0.92;
+}
+
+.ctaUrgent {
+  background: linear-gradient(90deg, #ef4444, #f97316);
+  color: white;
+  padding: 16px 28px;
+  border-radius: var(--radius);
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 10px 28px rgba(239, 68, 68, 0.35);
+}
+
+/* =========================================
+   PRODUCT GRID
+========================================= */
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 32px;
+  margin-top: 40px;
+}
+
+.productCard {
+  background: white;
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
+  text-align: center;
+  transition: 0.3s ease;
+}
+
+.productCard:hover {
+  transform: translateY(-6px);
+}
+
+.productCard img {
+  width: 100%;
+  height: 240px;
+  border-radius: 14px;
+  object-fit: cover;
+  margin-bottom: 16px;
+}
+
+.productPrice {
+  font-size: 1.6rem !important;
+  font-weight: 800;
+  color: var(--primary-dark);
+}
+
+/* =========================================
+   GALLERY
+========================================= */
+.galleryGrid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.galleryGrid img {
+  width: 100%;
+  height: 220px;
+  border-radius: var(--radius);
+  object-fit: cover;
+  box-shadow: var(--shadow);
+  transition: 0.3s ease;
+}
+
+.galleryGrid img:hover {
+  transform: scale(1.06);
+}
+
+/* =========================================
+   COUNTDOWN
+========================================= */
+.countdownTimer {
+  background: var(--gradient);
+  color: white;
+  padding: 26px;
+  border-radius: var(--radius);
+  font-size: 2.6rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+/* =========================================
+   FAQ
+========================================= */
+.faqItem {
+  background: white;
+  border-radius: var(--radius);
+  padding: 26px;
+  box-shadow: var(--shadow);
+}
+
+/* =========================================
+   TESTIMONIALS
+========================================= */
+.testimonialBox {
+  background: white;
+  border-radius: var(--radius);
+  padding: 26px;
+  box-shadow: var(--shadow);
+  text-align: center;
+}
