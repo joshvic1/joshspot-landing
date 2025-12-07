@@ -85,16 +85,14 @@ export default function FinalCTA({ section }) {
       });
 
       const data = await res.json();
+
       if (data.success) {
         localStorage.setItem("last_submit_time", Date.now().toString());
 
-        // ⭐⭐⭐ REDIRECT IF SET
-        if (section.formRedirect && section.formRedirect.trim() !== "") {
-          window.location.href = section.formRedirect;
-          return;
-        }
-
-        setDone(true);
+        // 🔥 Redirect after success
+        const redirectUrl = section.formRedirect || section.buttonLink || "/";
+        window.location.href = redirectUrl;
+        return;
       } else {
         setError("Failed to submit. Please try again.");
       }
@@ -124,7 +122,7 @@ export default function FinalCTA({ section }) {
         />
 
         {/* If form enabled */}
-        {section.hasForm && !done && (
+        {section.hasForm && (
           <form className={styles.finalForm} onSubmit={handleSubmit}>
             {error && <div className={styles.formError}>{error}</div>}
             <label style={{ color: section.textColor, fontWeight: 700 }}>
@@ -158,12 +156,6 @@ export default function FinalCTA({ section }) {
               {loading ? "Redirecting to Whatsapp..." : section.buttonText}
             </button>
           </form>
-        )}
-
-        {section.hasForm && done && (
-          <p className={styles.successMessage}>
-            Thank you! We will contact you shortly.
-          </p>
         )}
 
         {!section.hasForm && section.buttonText && (
