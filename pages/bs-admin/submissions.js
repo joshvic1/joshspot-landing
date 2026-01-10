@@ -5,11 +5,14 @@ import styles from "@/styles/admin/Submissions.module.css";
 import s from "@/styles/admin/Editor.module.css";
 import { useRouter } from "next/navigation";
 
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+
 export default function AdminSubmissionsPage() {
   const router = useRouter();
   const [items, setItems] = useState([]);
-  const [page, setPage] = useState(1); // current page
-  const [perPage] = useState(10); // submissions per page
+  const [page, setPage] = useState(1);
+  const [perPage] = useState(10);
+
   useEffect(() => {
     const token = localStorage.getItem("auth_token");
 
@@ -23,17 +26,13 @@ export default function AdminSubmissionsPage() {
   async function load() {
     const token = localStorage.getItem("auth_token");
 
-    const res = await fetch(
-      "https://joshspot-landing-backend-production.up.railway.app/api/submissions",
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    const res = await fetch(`${BASE_URL}/api/submissions`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
     const data = await res.json();
-    console.log("📥 RAW SUBMISSIONS:", data);
 
     if (data.error === "Unauthorized") {
       router.push("/bs-admin");
@@ -46,15 +45,12 @@ export default function AdminSubmissionsPage() {
   async function deleteItem(id) {
     if (!confirm("Delete this submission?")) return;
 
-    await fetch(
-      `https://joshspot-landing-backend-production.up.railway.app/api/submissions/${id}`,
-      {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
-        },
-      }
-    );
+    await fetch(`${BASE_URL}/api/submissions/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
+      },
+    });
 
     load();
   }
@@ -62,18 +58,7 @@ export default function AdminSubmissionsPage() {
   function formatPhone(p) {
     return `https://wa.me/${p.replace(/\D/g, "")}`;
   }
-  const IconAdd = () => (
-    <svg
-      width="20"
-      height="20"
-      stroke="currentColor"
-      fill="none"
-      strokeWidth="2"
-    >
-      <path d="M10 4v12M4 10h12" />
-    </svg>
-  );
-  // PAGINATION LOGIC
+
   const totalPages = Math.ceil(items.length / perPage);
   const start = (page - 1) * perPage;
   const currentItems = items.slice(start, start + perPage);
@@ -83,26 +68,20 @@ export default function AdminSubmissionsPage() {
       <header className={s.header}>
         <div className={s.headerRight}>
           <h2 className={s.logo}>FanStore</h2>
-          <button className={s.pixelBtn} onClick={() => setShowPixel(true)}>
-            Set Pixel
-          </button>
 
-          <button className={s.addBtn} onClick={() => setShowAdd(true)}>
-            <IconAdd /> Add Section
-          </button>
-        </div>
-        <div className={s.headerRight}>
           <button
             className={s.addBtn}
             onClick={() => router.push("/bs-admin/editor")}
           >
             Edit page
           </button>
+
           <button className={s.addBtn} onClick={() => router.push("/")}>
             Homepage
           </button>
         </div>
       </header>
+
       <div className={styles.wrapper}>
         <h2 className={styles.title}>Form Submissions</h2>
 

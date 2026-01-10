@@ -1,4 +1,4 @@
-const BASE_URL = "https://joshspot-landing-backend-production.up.railway.app"; // Express backend
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"; // fallback for local dev
 
 // Utility to get token
 function getAuthHeaders(extra = {}) {
@@ -6,17 +6,14 @@ function getAuthHeaders(extra = {}) {
     typeof window !== "undefined" ? localStorage.getItem("auth_token") : null;
 
   return {
-    Authorization: `Bearer ${token}`,
+    Authorization: token ? `Bearer ${token}` : "",
     ...extra,
   };
 }
 
 /* ---------------------------- FETCH SECTIONS ---------------------------- */
 export async function fetchSections() {
-  const res = await fetch(`${BASE_URL}/api/page`, {
-    headers: getAuthHeaders(),
-  });
-
+  const res = await fetch(`${BASE_URL}/api/page`);
   const data = await res.json();
   return data.sections || [];
 }
@@ -25,10 +22,12 @@ export async function fetchPage() {
   const token = localStorage.getItem("auth_token");
 
   const res = await fetch(`${BASE_URL}/api/page`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    },
+    headers: token
+      ? {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        }
+      : {},
   });
 
   const data = await res.json();
@@ -40,19 +39,7 @@ export async function fetchPage() {
   return data;
 }
 
-/* ---------------------------- SAVE SECTIONS ---------------------------- */
-export async function saveSections(sections) {
-  return fetch(`${BASE_URL}/api/page`, {
-    method: "POST",
-    headers: getAuthHeaders({ "Content-Type": "application/json" }),
-    body: JSON.stringify({
-      pixelCode: "",
-      themeColor: "",
-      sections,
-    }),
-  });
-}
-
+/* ---------------------------- SAVE PAGE ---------------------------- */
 export async function savePage(page) {
   const token = localStorage.getItem("auth_token");
 
@@ -75,7 +62,7 @@ export async function uploadImageToServer(file) {
 
   const res = await fetch(`${BASE_URL}/api/upload`, {
     method: "POST",
-    headers: getAuthHeaders(), // DO NOT add content-type manually
+    headers: getAuthHeaders(), // DO NOT set content-type
     body: formData,
   });
 
@@ -85,8 +72,6 @@ export async function uploadImageToServer(file) {
 
 /* ---------------------------- DELETE IMAGE ---------------------------- */
 export async function deleteImageOnServer(url) {
-  console.log("📤 Sending DELETE request for:", url);
-
   try {
     const res = await fetch(`${BASE_URL}/api/upload/delete`, {
       method: "POST",
@@ -95,11 +80,9 @@ export async function deleteImageOnServer(url) {
     });
 
     const data = await res.json();
-    console.log("📥 DELETE RESPONSE:", data);
-
     return data.success;
   } catch (err) {
-    console.error("❌ Delete request failed:", err);
+    console.error("Delete failed:", err);
     return false;
   }
 }

@@ -2,7 +2,6 @@
 
 export async function uploadJSONToCloudinary(jsonData) {
   try {
-    // Validate JSON
     if (typeof jsonData !== "object") {
       throw new Error("Invalid JSON data passed to uploadJSONToCloudinary()");
     }
@@ -16,24 +15,26 @@ export async function uploadJSONToCloudinary(jsonData) {
       return null;
     }
 
-    // Cloudinary endpoint for RAW files (JSON)
+    // 🔑 Use domain to isolate tenants
+    const domain =
+      typeof window !== "undefined"
+        ? window.location.hostname.replace(/\./g, "_")
+        : "unknown_site";
+
     const url = `https://api.cloudinary.com/v1_1/${cloudName}/raw/upload`;
 
-    // Convert JSON to Blob
     const jsonBlob = new Blob([JSON.stringify(jsonData)], {
       type: "application/json",
     });
 
-    // Create form
     const formData = new FormData();
-    formData.append("file", jsonBlob, "landing-page.json");
+    formData.append("file", jsonBlob, `${domain}.json`);
     formData.append("upload_preset", preset);
 
-    // Fixed public ID means the JSON gets replaced every publish
-    formData.append("public_id", "landing_page_data");
+    // ✅ Unique per site, replaced on every publish
+    formData.append("public_id", `landing_pages/${domain}`);
     formData.append("resource_type", "raw");
 
-    // Upload
     const upload = await fetch(url, {
       method: "POST",
       body: formData,
@@ -41,7 +42,6 @@ export async function uploadJSONToCloudinary(jsonData) {
 
     const result = await upload.json();
 
-    // Error handling
     if (!result.secure_url) {
       console.error("Cloudinary JSON upload error:", result);
       alert("Failed to publish changes. Check console for details.");

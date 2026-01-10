@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "@/styles/admin/Login.module.css";
 
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+
 export default function LoginPage() {
   const router = useRouter();
   const [email, setEmail] = useState("");
@@ -14,17 +16,14 @@ export default function LoginPage() {
   async function handleLogin(e) {
     e.preventDefault();
     setError("");
-
     setLoading(true);
+
     try {
-      const res = await fetch(
-        "https://joshspot-landing-backend-production.up.railway.app/api/auth/login",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, password: pass }),
-        }
-      );
+      const res = await fetch(`${BASE_URL}/api/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password: pass }),
+      });
 
       const data = await res.json();
 
