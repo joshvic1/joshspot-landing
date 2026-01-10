@@ -1,4 +1,5 @@
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"; // fallback for local dev
+const BASE_URL = "";
+// so fetch("/api/page") uses current domain
 
 // Utility to get token
 function getAuthHeaders(extra = {}) {
@@ -13,7 +14,7 @@ function getAuthHeaders(extra = {}) {
 
 /* ---------------------------- FETCH SECTIONS ---------------------------- */
 export async function fetchSections() {
-  const res = await fetch(`${BASE_URL}/api/page`);
+  const res = await fetch(`/api/page`);
   const data = await res.json();
   return data.sections || [];
 }
@@ -21,7 +22,7 @@ export async function fetchSections() {
 export async function fetchPage() {
   const token = localStorage.getItem("auth_token");
 
-  const res = await fetch(`${BASE_URL}/api/page`, {
+  const res = await fetch(`/api/page`, {
     headers: token
       ? {
           Authorization: `Bearer ${token}`,
@@ -43,7 +44,7 @@ export async function fetchPage() {
 export async function savePage(page) {
   const token = localStorage.getItem("auth_token");
 
-  const res = await fetch(`${BASE_URL}/api/page`, {
+  const res = await fetch(`/api/page`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -60,7 +61,7 @@ export async function uploadImageToServer(file) {
   const formData = new FormData();
   formData.append("image", file);
 
-  const res = await fetch(`${BASE_URL}/api/upload`, {
+  const res = await fetch(`/api/upload`, {
     method: "POST",
     headers: getAuthHeaders(), // DO NOT set content-type
     body: formData,
@@ -73,7 +74,7 @@ export async function uploadImageToServer(file) {
 /* ---------------------------- DELETE IMAGE ---------------------------- */
 export async function deleteImageOnServer(url) {
   try {
-    const res = await fetch(`${BASE_URL}/api/upload/delete`, {
+    const res = await fetch(`/api/upload/delete`, {
       method: "POST",
       headers: getAuthHeaders({ "Content-Type": "application/json" }),
       body: JSON.stringify({ url }),
