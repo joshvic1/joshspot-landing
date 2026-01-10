@@ -6,18 +6,21 @@ export default function TikTokInjector() {
   useEffect(() => {
     async function setup() {
       try {
-        const API_URL =
-          process.env.NEXT_PUBLIC_API_URL ||
-          "https://joshspot-landing-backend-production.up.railway.app";
+        const isLocalhost = window.location.hostname === "localhost";
 
-        const res = await fetch(`${API_URL}/api/page`);
+        const url = isLocalhost
+          ? "https://joshspot-landing-backend-production.up.railway.app/api/page"
+          : "/api/page";
+
+        const res = await fetch(url);
+
+        if (!res.ok) return;
 
         const data = await res.json();
         const pixel = data?.pixelCode?.trim();
-
         if (!pixel) return;
 
-        // If admin pasted whole script block
+        // If admin pasted full script
         if (pixel.includes("<script")) {
           const wrapper = document.createElement("div");
           wrapper.innerHTML = pixel;
@@ -25,12 +28,8 @@ export default function TikTokInjector() {
           return;
         }
 
-        // Prevent duplicate load
-        if (typeof window !== "undefined" && window.ttq) {
-          return;
-        }
+        if (window.ttq) return;
 
-        // TikTok BASE CODE (pure JS, no TypeScript)
         (function (w, d, t) {
           w.TiktokAnalyticsObject = t;
           var ttq = (w[t] = w[t] || []);
@@ -56,34 +55,21 @@ export default function TikTokInjector() {
           for (var i = 0; i < ttq.methods.length; i++) {
             ttq.setAndDefer(ttq, ttq.methods[i]);
           }
-
-          ttq.load = function (pixelId, config) {
-            var scriptURL = "https://analytics.tiktok.com/i18n/pixel/events.js";
-
-            ttq._i = ttq._i || {};
-            ttq._i[pixelId] = [];
-            ttq._i[pixelId]._u = scriptURL;
-
-            ttq._t = ttq._t || {};
-            ttq._t[pixelId] = +new Date();
-
-            ttq._o = ttq._o || {};
-            ttq._o[pixelId] = config || {};
-
-            var scriptTag = document.createElement("script");
-            scriptTag.async = true;
-            scriptTag.src = scriptURL + "?sdkid=" + pixelId + "&lib=" + t;
-
-            var firstScript = document.getElementsByTagName("script")[0];
-            firstScript.parentNode.insertBefore(scriptTag, firstScript);
+          ttq.load = function (pixelId) {
+            var s = document.createElement("script");
+            s.async = true;
+            s.src =
+              "https://analytics.tiktok.com/i18n/pixel/events.js?sdkid=" +
+              pixelId +
+              "&lib=ttq";
+            document.head.appendChild(s);
           };
         })(window, document, "ttq");
 
-        // Load TikTok pixel ID
         window.ttq.load(pixel);
         window.ttq.page();
       } catch (err) {
-        console.error("TikTok Pixel load failed:", err);
+        console.warn("TikTok injector skipped:", err.message);
       }
     }
 

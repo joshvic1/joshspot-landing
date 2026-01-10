@@ -82,13 +82,19 @@ export default function EditorPage() {
   }, []);
 
   function saveAll(updatedSections) {
-    console.log("🟢 SAVING SECTIONS:", updatedSections);
-
-    const updatedPage = { ...page, sections: updatedSections };
-
-    setPage(updatedPage);
     setSections(updatedSections);
-    savePage(updatedPage);
+
+    setPage((prev) => {
+      if (!prev) return prev;
+
+      const updated = {
+        ...prev,
+        sections: updatedSections,
+      };
+
+      savePage(updated);
+      return updated;
+    });
   }
 
   function toggleHide(id) {
