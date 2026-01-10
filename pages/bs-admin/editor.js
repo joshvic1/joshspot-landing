@@ -82,6 +82,8 @@ export default function EditorPage() {
   }, []);
 
   function saveAll(updatedSections) {
+    console.log("🟢 SAVING SECTIONS:", updatedSections);
+
     const updatedPage = { ...page, sections: updatedSections };
 
     setPage(updatedPage);
