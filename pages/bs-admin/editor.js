@@ -150,6 +150,43 @@ export default function EditorPage() {
   if (!page) return <p>Loading...</p>;
 
   /* ---------------------- RENDER PAGE ---------------------- */
+  function createSection(type) {
+    const base = {
+      id: `${type}_${Date.now()}`,
+      type,
+      hidden: false,
+      bgColor: "#ffffff",
+      textColor: "#000000",
+    };
+
+    const presets = {
+      text: { text: "Your text here" },
+      textWithButton: {
+        text: "Your text here",
+        buttonText: "Click me",
+        buttonLink: "#",
+      },
+      productShowcase: { title: "Products", products: [] },
+      testimonials: { title: "Testimonials", testimonials: [] },
+      gallery: { images: [] },
+      faq: { title: "FAQs", faqs: [] },
+      finalCTA: {
+        title: "Final Call To Action",
+        text: "Your CTA text",
+        buttonText: "Get Started",
+        buttonLink: "#",
+      },
+      footer: { text: "© 2025 Your Brand" },
+      countdown: {
+        title: "Offer Ends Soon",
+        deadline: "",
+        buttonText: "Claim Offer",
+        buttonLink: "#",
+      },
+    };
+
+    return { ...base, ...(presets[type] || {}) };
+  }
 
   return (
     <>
@@ -267,7 +304,16 @@ export default function EditorPage() {
         </DragDropContext>
 
         {/* MODALS */}
-        <AddSectionModal open={showAdd} setOpen={setShowAdd} />
+        <AddSectionModal
+          open={showAdd}
+          setOpen={setShowAdd}
+          onAdd={(type) => {
+            const newSection = createSection(type);
+            const updated = [...sections, newSection];
+            saveAll(updated);
+          }}
+        />
+
         <EditSectionModal
           open={showEdit}
           setOpen={setShowEdit}
