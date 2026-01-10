@@ -1,9 +1,6 @@
-const isLocalhost =
-  typeof window !== "undefined" && window.location.hostname === "localhost";
-
-const BASE_URL = isLocalhost
-  ? "https://joshspot-landing-backend-production.up.railway.app"
-  : "";
+const BASE_URL =
+  process.env.NEXT_PUBLIC_API_URL ||
+  "https://joshspot-landing-backend-production.up.railway.app";
 
 // so fetch("${BASE_URL}/api/page") uses current domain
 

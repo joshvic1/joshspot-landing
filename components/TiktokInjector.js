@@ -6,13 +6,11 @@ export default function TikTokInjector() {
   useEffect(() => {
     async function setup() {
       try {
-        const isLocalhost = window.location.hostname === "localhost";
+        const API_URL =
+          process.env.NEXT_PUBLIC_API_URL ||
+          "https://joshspot-landing-backend-production.up.railway.app";
 
-        const url = isLocalhost
-          ? "https://joshspot-landing-backend-production.up.railway.app/api/page"
-          : "/api/page";
-
-        const res = await fetch(url);
+        const res = await fetch(`${API_URL}/api/page`);
 
         if (!res.ok) return;
 
