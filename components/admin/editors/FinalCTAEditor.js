@@ -71,18 +71,22 @@ export default function FinalCTAEditor({ draft, change, styles }) {
         <label>Form - Name Label</label>
         <input
           className={styles.input}
-          value={draft.formNameLabel || "Enter your name"}
+          value={draft.formNameLabel ?? ""}
           onChange={(e) => change("formNameLabel", e.target.value)}
+          placeholder="Enter your name"
         />
       </div>
+
       <div className={styles.field}>
         <label>Form - Phone/WhatsApp Label</label>
         <input
           className={styles.input}
-          value={draft.formPhoneLabel || "Enter your WhatsApp number"}
+          value={draft.formPhoneLabel ?? ""}
           onChange={(e) => change("formPhoneLabel", e.target.value)}
+          placeholder="Enter your WhatsApp number"
         />
       </div>
+
       <div className={styles.field}>
         <label>Redirect URL after submit</label>
         <input

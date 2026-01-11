@@ -73,10 +73,13 @@ export default function FinalCTA({ section }) {
       }
 
       const res = await fetch(
-        "https://joshspot-landing-backend-production.up.railway.app/api/submissions",
+        `${process.env.NEXT_PUBLIC_API_URL}/api/submissions`,
         {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            "x-site-domain": window.location.hostname.toLowerCase(),
+          },
           body: JSON.stringify({
             sectionId: section.id,
             sectionTitle: section.title,
@@ -129,7 +132,7 @@ export default function FinalCTA({ section }) {
           <form className={styles.finalForm} onSubmit={handleSubmit}>
             {error && <div className={styles.formError}>{error}</div>}
             <label style={{ color: section.textColor, fontWeight: 700 }}>
-              {section.formNameLabel}
+              {section.formNameLabel || "Enter your name"}
             </label>
             <input
               type="text"
@@ -138,7 +141,7 @@ export default function FinalCTA({ section }) {
               required
             />
             <label style={{ color: section.textColor, fontWeight: 700 }}>
-              {section.formPhoneLabel}
+              {section.formPhoneLabel || "Enter your WhatsApp number"}
             </label>
 
             <input
