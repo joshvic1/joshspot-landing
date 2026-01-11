@@ -1,5 +1,30 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+const Site = require("../models/Site");
 
-export default function handler(req, res) {
-  res.status(200).json({ name: "John Doe" });
-}
+module.exports = async function siteResolver(req, res, next) {
+  try {
+    let host = req.headers.host;
+    if (!host) {
+      return res.status(400).json({ error: "No host header" });
+    }
+
+    // remove port
+    host = host.split(":")[0].toLowerCase();
+
+    // normalize www
+    if (host.startsWith("www.")) {
+      host = host.replace("www.", "");
+    }
+
+    const site = await Site.findOne({ domain: host });
+
+    if (!site) {
+      return res.status(404).json({ error: "Site not found" });
+    }
+
+    req.site = site;
+    next();
+  } catch (err) {
+    console.error("Site resolver error:", err);
+    res.status(500).json({ error: "Site resolution failed" });
+  }
+};
