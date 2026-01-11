@@ -1,9 +1,18 @@
 // utils/adminApi.js
 
-// Always use same-origin requests (domain-aware)
-const API_BASE = "";
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || "";
 
-// Utility to get auth headers
+/* ---------------- DOMAIN HEADER ---------------- */
+function getDomainHeaders(extra = {}) {
+  if (typeof window === "undefined") return extra;
+
+  return {
+    "x-site-domain": window.location.hostname.toLowerCase(),
+    ...extra,
+  };
+}
+
+/* ---------------- AUTH HEADERS ---------------- */
 function getAuthHeaders(extra = {}) {
   const token =
     typeof window !== "undefined" ? localStorage.getItem("auth_token") : null;
@@ -17,7 +26,10 @@ function getAuthHeaders(extra = {}) {
 /* ---------------- FETCH PAGE ---------------- */
 export async function fetchPage() {
   const res = await fetch(`${API_BASE}/api/page`, {
-    headers: getAuthHeaders({ "Content-Type": "application/json" }),
+    headers: {
+      ...getAuthHeaders(),
+      ...getDomainHeaders({ "Content-Type": "application/json" }),
+    },
   });
 
   if (!res.ok) {
@@ -27,11 +39,14 @@ export async function fetchPage() {
   return res.json();
 }
 
-/* ---------------- SAVE PAGE (AUTOSAVE) ---------------- */
+/* ---------------- SAVE PAGE ---------------- */
 export async function savePage(page) {
   const res = await fetch(`${API_BASE}/api/page`, {
     method: "POST",
-    headers: getAuthHeaders({ "Content-Type": "application/json" }),
+    headers: {
+      ...getAuthHeaders(),
+      ...getDomainHeaders({ "Content-Type": "application/json" }),
+    },
     body: JSON.stringify(page),
   });
 
@@ -49,7 +64,10 @@ export async function uploadImageToServer(file) {
 
   const res = await fetch(`${API_BASE}/api/upload`, {
     method: "POST",
-    headers: getAuthHeaders(),
+    headers: {
+      ...getAuthHeaders(),
+      ...getDomainHeaders(), // 🔥 REQUIRED
+    },
     body: formData,
   });
 
@@ -61,7 +79,10 @@ export async function uploadImageToServer(file) {
 export async function deleteImageOnServer(url) {
   const res = await fetch(`${API_BASE}/api/upload/delete`, {
     method: "POST",
-    headers: getAuthHeaders({ "Content-Type": "application/json" }),
+    headers: {
+      ...getAuthHeaders({ "Content-Type": "application/json" }),
+      ...getDomainHeaders(), // 🔥 REQUIRED
+    },
     body: JSON.stringify({ url }),
   });
 
