@@ -38,6 +38,22 @@ export default function FinalCTA({ section }) {
   }
 
   // --------------------------
+  // Get redirect URL
+  // --------------------------
+
+  function getRedirectUrl(section) {
+    if (section.formRedirect && section.formRedirect.trim().length > 3) {
+      return section.formRedirect.trim();
+    }
+
+    if (section.buttonLink && section.buttonLink.trim().length > 3) {
+      return section.buttonLink.trim();
+    }
+
+    return "/";
+  }
+
+  // --------------------------
   // RATE LIMIT CHECK
   // --------------------------
   function isRateLimited() {
@@ -95,8 +111,7 @@ export default function FinalCTA({ section }) {
       if (data.success) {
         localStorage.setItem("last_submit_time", Date.now().toString());
 
-        // 🔥 Redirect after success
-        const redirectUrl = section.formRedirect || section.buttonLink || "/";
+        const redirectUrl = getRedirectUrl(section);
         window.location.href = redirectUrl;
         return;
       } else {

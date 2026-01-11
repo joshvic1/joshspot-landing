@@ -91,9 +91,9 @@ export default function FinalCTAEditor({ draft, change, styles }) {
         <label>Redirect URL after submit</label>
         <input
           className={styles.input}
-          value={draft.formRedirect || ""}
+          value={draft.formRedirect ?? ""}
           onChange={(e) => change("formRedirect", e.target.value)}
-          placeholder="https://wa.me/234XXXXXXXXXX or a thank-you page"
+          placeholder="https://wa.me/234XXXXXXXXXX or thank-you page"
         />
       </div>
     </div>
