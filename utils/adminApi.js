@@ -1,7 +1,8 @@
 // utils/adminApi.js
 
-// Always use same-origin requests (domain-aware)
-const API_BASE = "";
+const BACKEND_URL =
+  process.env.NEXT_PUBLIC_BACKEND_URL ||
+  "https://joshspot-landing-backend-production.up.railway.app";
 
 // Utility to get auth headers
 function getAuthHeaders(extra = {}) {
@@ -16,7 +17,7 @@ function getAuthHeaders(extra = {}) {
 
 /* ---------------- FETCH PAGE ---------------- */
 export async function fetchPage() {
-  const res = await fetch(`${API_BASE}/api/page`, {
+  const res = await fetch(`${BACKEND_URL}/api/page`, {
     headers: getAuthHeaders({ "Content-Type": "application/json" }),
   });
 
@@ -29,7 +30,7 @@ export async function fetchPage() {
 
 /* ---------------- SAVE PAGE (AUTOSAVE) ---------------- */
 export async function savePage(page) {
-  const res = await fetch(`${API_BASE}/api/page`, {
+  const res = await fetch(`${BACKEND_URL}/api/page`, {
     method: "POST",
     headers: getAuthHeaders({ "Content-Type": "application/json" }),
     body: JSON.stringify(page),
@@ -47,7 +48,7 @@ export async function uploadImageToServer(file) {
   const formData = new FormData();
   formData.append("image", file);
 
-  const res = await fetch(`${API_BASE}/api/upload`, {
+  const res = await fetch(`${BACKEND_URL}/api/upload`, {
     method: "POST",
     headers: getAuthHeaders(),
     body: formData,
@@ -59,7 +60,7 @@ export async function uploadImageToServer(file) {
 
 /* ---------------- DELETE IMAGE ---------------- */
 export async function deleteImageOnServer(url) {
-  const res = await fetch(`${API_BASE}/api/upload/delete`, {
+  const res = await fetch(`${BACKEND_URL}/api/upload/delete`, {
     method: "POST",
     headers: getAuthHeaders({ "Content-Type": "application/json" }),
     body: JSON.stringify({ url }),
