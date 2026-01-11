@@ -10,7 +10,7 @@ export default function Home() {
   const [page, setPage] = useState(null);
 
   useEffect(() => {
-    fetchPage().then((data) => setPage(data));
+    fetchPage().then((data) => setPage(data.page));
   }, []);
 
   if (!page) return <p>Loading...</p>;

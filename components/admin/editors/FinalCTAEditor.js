@@ -59,13 +59,14 @@ export default function FinalCTAEditor({ draft, change, styles }) {
         <label>Enable contact form</label>
         <select
           className={styles.input}
-          value={draft.hasForm ? "yes" : "no"}
+          value={draft.hasForm === true ? "yes" : "no"}
           onChange={(e) => change("hasForm", e.target.value === "yes")}
         >
           <option value="yes">Yes</option>
           <option value="no">No</option>
         </select>
       </div>
+
       <div className={styles.field}>
         <label>Form - Name Label</label>
         <input
