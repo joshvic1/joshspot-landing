@@ -6,19 +6,13 @@ export default function TikTokInjector() {
   useEffect(() => {
     async function setup() {
       try {
-        const API_URL =
-          process.env.NEXT_PUBLIC_API_URL ||
-          "https://joshspot-landing-backend-production.up.railway.app";
-
-        const res = await fetch(`${API_URL}/api/page`);
-
+        const res = await fetch("/api/page");
         if (!res.ok) return;
 
         const data = await res.json();
         const pixel = data?.pixelCode?.trim();
         if (!pixel) return;
 
-        // If admin pasted full script
         if (pixel.includes("<script")) {
           const wrapper = document.createElement("div");
           wrapper.innerHTML = pixel;
@@ -47,7 +41,7 @@ export default function TikTokInjector() {
           ];
           ttq.setAndDefer = function (obj, method) {
             obj[method] = function () {
-              obj.push([method].concat([].slice.call(arguments, 0)));
+              obj.push([method].concat([].slice.call(arguments)));
             };
           };
           for (var i = 0; i < ttq.methods.length; i++) {
@@ -66,8 +60,8 @@ export default function TikTokInjector() {
 
         window.ttq.load(pixel);
         window.ttq.page();
-      } catch (err) {
-        console.warn("TikTok injector skipped:", err.message);
+      } catch {
+        // silently fail
       }
     }
 

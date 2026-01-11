@@ -1,72 +1,55 @@
-const BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL ||
-  "https://joshspot-landing-backend-production.up.railway.app";
+// utils/adminApi.js
 
-// so fetch("${BASE_URL}/api/page") uses current domain
+// Always use same-origin requests (domain-aware)
+const API_BASE = "";
 
-// Utility to get token
+// Utility to get auth headers
 function getAuthHeaders(extra = {}) {
   const token =
     typeof window !== "undefined" ? localStorage.getItem("auth_token") : null;
 
   return {
-    Authorization: token ? `Bearer ${token}` : "",
+    ...(token ? { Authorization: `Bearer ${token}` } : {}),
     ...extra,
   };
 }
 
-/* ---------------------------- FETCH SECTIONS ---------------------------- */
-export async function fetchSections() {
-  const res = await fetch(`${BASE_URL}/api/page`);
-  const data = await res.json();
-  return data.sections || [];
-}
-
+/* ---------------- FETCH PAGE ---------------- */
 export async function fetchPage() {
-  const token = localStorage.getItem("auth_token");
-
-  const res = await fetch(`${BASE_URL}/api/page`, {
-    headers: token
-      ? {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        }
-      : {},
+  const res = await fetch(`${API_BASE}/api/page`, {
+    headers: getAuthHeaders({ "Content-Type": "application/json" }),
   });
 
-  const data = await res.json();
-
-  if (data.error === "Unauthorized") {
-    throw new Error("Unauthorized");
+  if (!res.ok) {
+    throw new Error("Failed to load page");
   }
 
-  return data;
+  return res.json();
 }
 
-/* ---------------------------- SAVE PAGE ---------------------------- */
+/* ---------------- SAVE PAGE (AUTOSAVE) ---------------- */
 export async function savePage(page) {
-  const token = localStorage.getItem("auth_token");
-
-  const res = await fetch(`${BASE_URL}/api/page`, {
+  const res = await fetch(`${API_BASE}/api/page`, {
     method: "POST",
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    },
+    headers: getAuthHeaders({ "Content-Type": "application/json" }),
     body: JSON.stringify(page),
   });
 
-  return await res.json();
+  if (!res.ok) {
+    throw new Error("Failed to save page");
+  }
+
+  return res.json();
 }
 
-/* ---------------------------- IMAGE UPLOAD ---------------------------- */
+/* ---------------- IMAGE UPLOAD ---------------- */
 export async function uploadImageToServer(file) {
   const formData = new FormData();
   formData.append("image", file);
 
-  const res = await fetch(`${BASE_URL}/api/upload`, {
+  const res = await fetch(`${API_BASE}/api/upload`, {
     method: "POST",
-    headers: getAuthHeaders(), // DO NOT set content-type
+    headers: getAuthHeaders(),
     body: formData,
   });
 
@@ -74,19 +57,14 @@ export async function uploadImageToServer(file) {
   return data.url;
 }
 
-/* ---------------------------- DELETE IMAGE ---------------------------- */
+/* ---------------- DELETE IMAGE ---------------- */
 export async function deleteImageOnServer(url) {
-  try {
-    const res = await fetch(`${BASE_URL}/api/upload/delete`, {
-      method: "POST",
-      headers: getAuthHeaders({ "Content-Type": "application/json" }),
-      body: JSON.stringify({ url }),
-    });
+  const res = await fetch(`${API_BASE}/api/upload/delete`, {
+    method: "POST",
+    headers: getAuthHeaders({ "Content-Type": "application/json" }),
+    body: JSON.stringify({ url }),
+  });
 
-    const data = await res.json();
-    return data.success;
-  } catch (err) {
-    console.error("Delete failed:", err);
-    return false;
-  }
+  const data = await res.json();
+  return data.success;
 }
