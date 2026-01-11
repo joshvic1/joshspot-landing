@@ -1,17 +1,30 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "@/styles/admin/Login.module.css";
+import { fetchPage } from "@/utils/adminApi";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
 export default function LoginPage() {
   const router = useRouter();
   const [email, setEmail] = useState("");
+  const [page, setPage] = useState(null);
+  const [sections, setSections] = useState([]);
   const [pass, setPass] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  const [site, setSite] = useState(null);
+
+  useEffect(() => {
+    fetchPage().then((data) => {
+      setPage(data.page);
+      setSections(data.page?.sections || []);
+      setSite(data.site);
+    });
+  }, []);
 
   async function handleLogin(e) {
     e.preventDefault();
@@ -45,7 +58,7 @@ export default function LoginPage() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.card}>
-        <h1 className={styles.logo}>FanStore Admin</h1>
+        <h1 className={styles.logo}>{site?.name || "Dashboard"} Admin</h1>
         <p className={styles.subtitle}>Sign in to continue</p>
 
         {error && <div className={styles.error}>{error}</div>}
