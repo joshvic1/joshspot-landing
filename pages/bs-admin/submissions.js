@@ -5,6 +5,11 @@ import styles from "@/styles/admin/Submissions.module.css";
 import s from "@/styles/admin/Editor.module.css";
 import { useRouter } from "next/navigation";
 
+function getDomainHeader() {
+  if (typeof window === "undefined") return {};
+  return { "x-site-domain": window.location.hostname.toLowerCase() };
+}
+
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
 export default function AdminSubmissionsPage() {
@@ -29,6 +34,7 @@ export default function AdminSubmissionsPage() {
     const res = await fetch(`${BASE_URL}/api/submissions`, {
       headers: {
         Authorization: `Bearer ${token}`,
+        ...getDomainHeader(), // 🔥 REQUIRED
       },
     });
 
@@ -49,6 +55,7 @@ export default function AdminSubmissionsPage() {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
+        ...getDomainHeader(), // 🔥 REQUIRED
       },
     });
 
@@ -67,7 +74,7 @@ export default function AdminSubmissionsPage() {
     <>
       <header className={s.header}>
         <div className={s.headerRight}>
-          <h2 className={s.logo}>FanStore</h2>
+          <h2 className={s.logo}>Leads</h2>
 
           <button
             className={s.addBtn}
