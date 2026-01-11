@@ -1,11 +1,18 @@
 "use client";
 import { useEffect } from "react";
 
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || "";
+
 export default function TikTokInjector() {
   useEffect(() => {
     async function load() {
       try {
-        const res = await fetch("/api/page");
+        const res = await fetch(`${API_BASE}/api/page`, {
+          headers: {
+            "x-site-domain": window.location.hostname.toLowerCase(),
+          },
+        });
+
         if (!res.ok) return;
 
         const data = await res.json();
@@ -34,7 +41,9 @@ export default function TikTokInjector() {
 
         window.ttq.load(pixel);
         window.ttq.page();
-      } catch {}
+      } catch (err) {
+        console.error("TikTok pixel load failed", err);
+      }
     }
 
     load();
