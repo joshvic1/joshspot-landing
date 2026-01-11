@@ -73,11 +73,13 @@ export default function EditorPage() {
     }
   }, []);
 
-  /* Load Page */
+  const [site, setSite] = useState(null);
+
   useEffect(() => {
     fetchPage().then((data) => {
-      setPage(data);
-      setSections(data?.sections || []);
+      setPage(data.page);
+      setSections(data.page?.sections || []);
+      setSite(data.site);
     });
   }, []);
 
@@ -200,7 +202,8 @@ export default function EditorPage() {
     <>
       <header className={styles.header}>
         <div className={styles.headerRight}>
-          <h2 className={styles.logo}>FanStore</h2>
+          <h2 className={styles.logo}>{site?.name || "Dashboard"}</h2>
+
           <button
             className={styles.pixelBtn}
             onClick={() => setShowPixel(true)}
