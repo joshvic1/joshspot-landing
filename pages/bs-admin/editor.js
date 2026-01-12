@@ -94,10 +94,28 @@ export default function EditorPage() {
         sections: updatedSections,
       };
 
-      savePage(updated);
+      savePage(updated).catch((err) => {
+        if (err.message.includes("STALE_EDITOR")) {
+          alert(
+            "This page was updated in another tab. Please refresh to avoid overwriting changes."
+          );
+        }
+      });
+
       return updated;
     });
   }
+  useEffect(() => {
+    function onFocus() {
+      fetchPage().then((data) => {
+        setPage(data.page);
+        setSections(data.page.sections || []);
+      });
+    }
+
+    window.addEventListener("focus", onFocus);
+    return () => window.removeEventListener("focus", onFocus);
+  }, []);
 
   function toggleHide(id) {
     const updated = sections.map((s) =>

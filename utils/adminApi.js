@@ -23,6 +23,11 @@ function getAuthHeaders(extra = {}) {
   };
 }
 
+function getDomainHeader() {
+  if (typeof window === "undefined") return {};
+  return { "x-site-domain": window.location.hostname.toLowerCase() };
+}
+
 /* ---------------- FETCH PAGE ---------------- */
 export async function fetchPage() {
   const res = await fetch(`${API_BASE}/api/page`, {
@@ -47,7 +52,10 @@ export async function savePage(page) {
       ...getAuthHeaders(),
       ...getDomainHeaders({ "Content-Type": "application/json" }),
     },
-    body: JSON.stringify(page),
+    body: JSON.stringify({
+      ...page,
+      lastKnownUpdate: page.updatedAt, // 🔥 ADD THIS
+    }),
   });
 
   if (!res.ok) {
