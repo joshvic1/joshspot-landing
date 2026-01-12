@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import SectionRenderer from "@/components/sections/SectionRenderer";
 import styles from "@/styles/Section.module.css";
 import { fetchPage } from "@/utils/adminApi";
+import PageLoader from "@/components/ui/PageLoader";
 
 export default function Home() {
   const [page, setPage] = useState(null);
@@ -13,7 +14,7 @@ export default function Home() {
     fetchPage().then((data) => setPage(data.page));
   }, []);
 
-  if (!page) return <p>Loading...</p>;
+  if (!page) return <PageLoader text="Loading page" />;
 
   return (
     <div className={styles.page}>
